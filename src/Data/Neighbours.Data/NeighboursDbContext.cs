@@ -19,6 +19,24 @@ namespace Neighbours.Data
 
         public DbContext DbContext => this;
 
+        public virtual IDbSet<ProfileImage> ProfileImages { get; set; }
+
+        public virtual IDbSet<Community> Communities { get; set; }
+
+        public virtual IDbSet<CommunityImage> CommunityImages { get; set; }
+
+        public virtual IDbSet<City> Cities { get; set; }
+
+        public virtual IDbSet<Comment> Comments { get; set; }
+
+        public virtual IDbSet<CommentImage> CommentImages { get; set; }
+
+        public virtual IDbSet<District> Districts { get; set; }
+
+        public virtual IDbSet<Post> Posts { get; set; }
+
+        public virtual IDbSet<PostImage> PostImages { get; set; }
+
         public override int SaveChanges()
         {
             this.ApplyAuditInfoRules();

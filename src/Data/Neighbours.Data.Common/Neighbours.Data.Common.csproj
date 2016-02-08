@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\ValidationConstants.cs" />
     <Compile Include="Models\AuditInfo.cs" />
     <Compile Include="Models\DeletableEntity.cs" />
     <Compile Include="Models\IAuditInfo.cs" />

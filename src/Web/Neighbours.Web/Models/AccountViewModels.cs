@@ -49,6 +49,10 @@ namespace Neighbours.Web.Models
     public class LoginViewModel
     {
         [Required]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+
+        [Required]
         [Display(Name = "Email")]
         [EmailAddress]
         public string Email { get; set; }
@@ -64,6 +68,10 @@ namespace Neighbours.Web.Models
 
     public class RegisterViewModel
     {
+        [Required]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]

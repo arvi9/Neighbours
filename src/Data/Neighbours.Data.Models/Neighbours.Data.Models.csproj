@@ -85,12 +85,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="City.cs" />
+    <Compile Include="Comment.cs" />
+    <Compile Include="CommentImage.cs" />
+    <Compile Include="Community.cs" />
+    <Compile Include="CommunityImage.cs" />
+    <Compile Include="District.cs" />
+    <Compile Include="FileInfo.cs" />
+    <Compile Include="Post.cs" />
+    <Compile Include="PostImage.cs" />
+    <Compile Include="ProfileImage.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Neighbours.Data.Common\Neighbours.Data.Common.csproj">
+      <Project>{48f84a40-aedf-40d5-baf3-b5338bf7ecc1}</Project>
+      <Name>Neighbours.Data.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
