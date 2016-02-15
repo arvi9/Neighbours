@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Neighbours.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,8 +10,21 @@ namespace Neighbours.Web.Models.Account
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "FirstName")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Display(Name = "Birth Date")]
+        public DateTime BirthDate { get; set; }
+
+        [Required]
         [Display(Name = "User Name")]
         public string UserName { get; set; }
+
+        public ProfileImage ProfileImage { get; set; }
 
         [Required]
         [EmailAddress]

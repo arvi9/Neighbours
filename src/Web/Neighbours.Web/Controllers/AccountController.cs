@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using Neighbours.Web.Models;
 using Neighbours.Data.Models;
 using Neighbours.Web.Models.Account;
+using System.Collections.Generic;
 
 namespace Neighbours.Web.Controllers
 {
@@ -149,8 +150,9 @@ namespace Neighbours.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, HttpPostedFileBase ProfileImage)
         {
+            
             if (ModelState.IsValid)
             {
                 var user = new User { UserName = model.UserName, Email = model.Email };
