@@ -102,6 +102,10 @@
 
                         geocodePosition(marker.getPosition());
 
+                        google.maps.event.addListener(marker, 'click', function () {
+                            infowindow.open(map, marker);
+                        });
+
                         google.maps.event.addListener(marker, 'dragend', function() {
                             //updateMarkerStatus('Drag ended');
                             geocodePosition(marker.getPosition());
@@ -117,6 +121,7 @@
                             bounds.extend(place.geometry.location);
                         }
                     });
+                    
                     map.fitBounds(bounds);
                 });
             }

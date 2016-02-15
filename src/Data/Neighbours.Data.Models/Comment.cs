@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace Neighbours.Data.Models
 
         public string Content { get; set; }
 
-        public int CommentImageId { get; set; }
+        public int? CommentImageId { get; set; }
 
         public virtual CommentImage CommentImage { get; set; }
 

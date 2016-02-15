@@ -24,7 +24,7 @@ namespace Neighbours.Web.Models
 
         protected override void Configure()
         {
-            CreateMap<User, UserViewModel>()
+            this.CreateMap<User, UserViewModel>()
                 .ForMember(u => u.Id, opts => opts.MapFrom(g => g.Id))
                 .ForMember(u => u.UserName, opts => opts.MapFrom(g => g.UserName));
         }
