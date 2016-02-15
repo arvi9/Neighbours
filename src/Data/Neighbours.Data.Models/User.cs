@@ -25,12 +25,12 @@ namespace Neighbours.Data.Models
 
         [Required]
         [DisplayName("First name")]
-        [StringLength(25, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 3)]
+        [StringLength(25, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
         public string FirstName { get; set; }
 
         [Required]
         [DisplayName("Last name")]
-        [StringLength(25, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 3)]
+        [StringLength(25, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
         public string LastName { get; set; }
 
         [DisplayName("Date of birth")]

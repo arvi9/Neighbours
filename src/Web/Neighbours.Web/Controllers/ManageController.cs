@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Neighbours.Web.Models;
+using Neighbours.Web.Models.Manage;
 
 namespace Neighbours.Web.Controllers
 {
