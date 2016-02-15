@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Neighbours.Web.Models;
 using Neighbours.Data.Models;
+using Neighbours.Web.Models.Account;
 
 namespace Neighbours.Web.Controllers
 {

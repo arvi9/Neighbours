@@ -102,6 +102,7 @@
 
                         geocodePosition(marker.getPosition());
 
+
                         google.maps.event.addListener(marker, 'click', function () {
                             infowindow.open(map, marker);
                         });
@@ -121,7 +122,7 @@
                             bounds.extend(place.geometry.location);
                         }
                     });
-                    
+
                     map.fitBounds(bounds);
                 });
             }
