@@ -10,9 +10,9 @@ namespace Neighbours.Data.Models
     [Table("CommentImages")]
     public class CommentImage : FileInfo
     {
-        public int CommentId { get; set; }
+        //public int CommentId { get; set; }
 
         //[InverseProperty("CommentImage")]
-        public virtual Comment Comment { get; set; }
+        //public virtual Comment Comment { get; set; }
     }
 }

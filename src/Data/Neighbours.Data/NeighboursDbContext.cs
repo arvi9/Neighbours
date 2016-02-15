@@ -19,7 +19,7 @@ namespace Neighbours.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Comment>().HasOptional(x => x.CommentImage).WithRequired(x => x.Comment).WillCascadeOnDelete(false);
+            //modelBuilder.Entity<Comment>().HasOptional(x => x.CommentImage).WithRequired(x => x.Comment).WillCascadeOnDelete(false);
 
             base.OnModelCreating(modelBuilder);
         }
