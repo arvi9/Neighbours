@@ -12,11 +12,10 @@
         [Display(Name = "User Name")]
         public string UserName { get; set; }
 
-        [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
-
+        // [Required]
+        // [Display(Name = "Email")]
+        // [EmailAddress]
+        // public string Email { get; set; }
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]

@@ -10,7 +10,7 @@
     @Html.AntiForgeryToken()
     <h4>Create a new account.</h4>
     <hr />
-    @*@Html.ValidationSummary("", new { @class = "alert alert-danger" })*@
+    @Html.ValidationSummary("", new { @class = "alert alert-danger" })
     <div class="form-group">
         @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
@@ -58,7 +58,7 @@
     <div class="form-group">
         @Html.LabelFor(m => m.ProfileImage, new { @class = "col-md-2 control-label" })
         <div class="col-md-5">
-            @Html.Kendo().Upload().Name("ProfileImage").HtmlAttributes(new { @class = "form-control" }).Multiple(false)
+            @Html.Kendo().Upload().Name("profileImage").HtmlAttributes(new { @class = "form-control" }).Multiple(false)
         </div>
     </div>
     <div class="form-group">

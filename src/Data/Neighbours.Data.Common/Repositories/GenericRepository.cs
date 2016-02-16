@@ -102,5 +102,10 @@
         {
             return this.DbSet.Find(id);
         }
+
+        public void HardDelete(T entity)
+        {
+            this.DbSet.Remove(entity);
+        }
     }
 }
