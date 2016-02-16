@@ -1,15 +1,12 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
-using Neighbours.Data.Common.Models;
-using Neighbours.Data.Models;
-
-namespace Neighbours.Data
+﻿namespace Neighbours.Data
 {
+    using System;
+    using System.Data.Entity;
+    using System.Linq;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Neighbours.Data.Common.Models;
+    using Neighbours.Data.Models;
+
     public class NeighboursDbContext : IdentityDbContext<User>, INeighboursDbContext
     {
         public NeighboursDbContext()
@@ -17,12 +14,6 @@ namespace Neighbours.Data
         {
         }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            //modelBuilder.Entity<Comment>().HasOptional(x => x.CommentImage).WithRequired(x => x.Comment).WillCascadeOnDelete(false);
-
-            base.OnModelCreating(modelBuilder);
-        }
         public DbContext DbContext => this;
 
         public virtual IDbSet<ProfileImage> ProfileImages { get; set; }
@@ -43,6 +34,11 @@ namespace Neighbours.Data
 
         public virtual IDbSet<PostImage> PostImages { get; set; }
 
+        public static NeighboursDbContext Create()
+        {
+            return new NeighboursDbContext();
+        }
+
         public override int SaveChanges()
         {
             this.ApplyAuditInfoRules();
@@ -56,9 +52,10 @@ namespace Neighbours.Data
             return base.Set<T>();
         }
 
-        public static NeighboursDbContext Create()
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            return new NeighboursDbContext();
+            // modelBuilder.Entity<Comment>().HasOptional(x => x.CommentImage).WithRequired(x => x.Comment).WillCascadeOnDelete(false);
+            base.OnModelCreating(modelBuilder);
         }
 
         private void ApplyAuditInfoRules()
@@ -103,4 +100,3 @@ namespace Neighbours.Data
         }
     }
 }
-

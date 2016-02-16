@@ -1,9 +1,9 @@
 ﻿namespace Neighbours.Data.Common.Repositories
 {
-    using Models;
     using System;
     using System.Data.Entity;
     using System.Linq;
+    using Models;
 
     public class DeletableEntityRepository<T> : GenericRepository<T>, IDeletableEntityRepository<T>
         where T : class, IDeletableEntity

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-
-namespace Neighbours.Web.Models.Account
+﻿namespace Neighbours.Web.Models.Account
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Web;
+
     public class VerifyCodeViewModel
     {
         [Required]
@@ -14,6 +14,7 @@ namespace Neighbours.Web.Models.Account
         [Required]
         [Display(Name = "Code")]
         public string Code { get; set; }
+
         public string ReturnUrl { get; set; }
 
         [Display(Name = "Remember this browser?")]
@@ -21,5 +22,4 @@ namespace Neighbours.Web.Models.Account
 
         public bool RememberMe { get; set; }
     }
-
 }

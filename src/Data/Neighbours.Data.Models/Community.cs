@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Neighbours.Data.Models
+﻿namespace Neighbours.Data.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
     public class Community
     {
         private ICollection<User> users;
@@ -41,6 +41,7 @@ namespace Neighbours.Data.Models
             {
                 return this.users;
             }
+
             set
             {
                 this.users = value;
@@ -53,12 +54,11 @@ namespace Neighbours.Data.Models
             {
                 return this.posts;
             }
+
             set
             {
                 this.posts = value;
             }
         }
-
-
     }
 }

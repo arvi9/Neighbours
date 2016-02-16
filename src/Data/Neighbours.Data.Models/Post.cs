@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Neighbours.Data.Models
+﻿namespace Neighbours.Data.Models
 {
+    using System.Collections.Generic;
+
     public class Post
     {
-        
         private ICollection<Comment> comments;
 
         public Post()
@@ -36,6 +31,7 @@ namespace Neighbours.Data.Models
             {
                 return this.comments;
             }
+
             set
             {
                 this.comments = value;

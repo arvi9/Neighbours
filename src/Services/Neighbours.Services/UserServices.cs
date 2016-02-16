@@ -1,14 +1,14 @@
-﻿using Neighbours.Services.Data.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Neighbours.Data.Models;
-using Neighbours.Data.Common.Repositories;
-
-namespace Neighbours.Services.Data
+﻿namespace Neighbours.Services.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Neighbours.Data.Common.Repositories;
+    using Neighbours.Data.Models;
+    using Neighbours.Services.Data.Contracts;
+
     public class UserServices : IUserServices
     {
         private readonly IRepository<User> users;

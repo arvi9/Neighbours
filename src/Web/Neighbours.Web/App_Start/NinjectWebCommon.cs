@@ -1,8 +1,11 @@
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Neighbours.Web.App_Start.NinjectWebCommon), "Start")]
+﻿[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Neighbours.Web.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Neighbours.Web.App_Start.NinjectWebCommon), "Stop")]
 
 namespace Neighbours.Web.App_Start
 {
+    using System;
+    using System.Data.Entity;
+    using System.Web;
     using AutoMapper;
     using Common.Constants;
     using Data;
@@ -12,16 +15,10 @@ namespace Neighbours.Web.App_Start
     using Ninject.Extensions.Conventions;
     using Ninject.Web.Common;
     using Services.Common.Contracts;
-    using System;
-    using System.Collections.Generic;
-    using System.Data.Entity;
-    using System.Linq;
-    using System.Reflection;
-    using System.Web;
 
     public static class NinjectWebCommon
     {
-        private static readonly Bootstrapper bootstrapper = new Bootstrapper();
+        private static readonly Bootstrapper Bootstrapper = new Bootstrapper();
 
         /// <summary>
         /// Starts the application
@@ -30,7 +27,7 @@ namespace Neighbours.Web.App_Start
         {
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
-            bootstrapper.Initialize(CreateKernel);
+            Bootstrapper.Initialize(CreateKernel);
         }
 
         /// <summary>
@@ -38,7 +35,7 @@ namespace Neighbours.Web.App_Start
         /// </summary>
         public static void Stop()
         {
-            bootstrapper.ShutDown();
+            Bootstrapper.ShutDown();
         }
 
         /// <summary>
@@ -72,8 +69,6 @@ namespace Neighbours.Web.App_Start
             kernel.Bind(typeof(IRepository<>)).To(typeof(GenericRepository<>));
             kernel.Bind<DbContext>().To<NeighboursDbContext>().InRequestScope();
 
-
-            //kernel.Bind<IUserServices>().To<UserServices>();
             // TODO: Check if exception for IService
             kernel.Bind(k => k
                 .From(

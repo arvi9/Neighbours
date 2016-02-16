@@ -11,9 +11,8 @@ namespace Neighbours.Web
         public void Configuration(IAppBuilder app)
         {
             //// Static API before 4.2.0. Use only with the old Automapper
-            //AutoMapperConfig.RegisterMappings(Assemblies.ViewModels);
-
-            ConfigureAuth(app);
+            // AutoMapperConfig.RegisterMappings(Assemblies.ViewModels);
+            this.ConfigureAuth(app);
         }
     }
 }

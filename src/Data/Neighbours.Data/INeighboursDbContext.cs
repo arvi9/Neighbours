@@ -1,18 +1,11 @@
-﻿using Neighbours.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Neighbours.Data
+﻿namespace Neighbours.Data
 {
+    using System.Data.Entity;
+    using System.Data.Entity.Infrastructure;
+    using Neighbours.Data.Models;
+
     public interface INeighboursDbContext
     {
-        IDbSet<T> Set<T>() where T : class;
-
         IDbSet<User> Users { get; set; }
 
         IDbSet<ProfileImage> ProfileImages { get; set; }
@@ -33,17 +26,13 @@ namespace Neighbours.Data
 
         IDbSet<PostImage> PostImages { get; set; }
 
-
-
-
-
-
-
-
-
         DbContext DbContext { get; }
 
-        DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
+        IDbSet<T> Set<T>()
+            where T : class;
+
+        DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity)
+            where TEntity : class;
 
         void Dispose();
 

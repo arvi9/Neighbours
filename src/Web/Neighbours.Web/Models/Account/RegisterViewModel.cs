@@ -1,12 +1,9 @@
-﻿using Neighbours.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-
-namespace Neighbours.Web.Models.Account
+﻿namespace Neighbours.Web.Models.Account
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using Neighbours.Data.Models;
+
     public class RegisterViewModel
     {
         [Required]
@@ -42,5 +39,4 @@ namespace Neighbours.Web.Models.Account
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
-
 }

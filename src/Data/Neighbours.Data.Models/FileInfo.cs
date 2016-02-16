@@ -1,13 +1,13 @@
-﻿using Neighbours.Data.Common.Constants;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Neighbours.Data.Models
+﻿namespace Neighbours.Data.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Neighbours.Data.Common.Constants;
+
     public abstract class FileInfo
     {
         public int Id { get; set; }

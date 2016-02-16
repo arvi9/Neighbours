@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Neighbours.Data.Models
+﻿namespace Neighbours.Data.Models
 {
+    using System.Collections.Generic;
+
     public class City
     {
         private ICollection<District> districts;
@@ -10,15 +10,18 @@ namespace Neighbours.Data.Models
         {
             this.districts = new HashSet<District>();
         }
-        
+
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public ICollection<District> Districts { get
+        public ICollection<District> Districts
+        {
+            get
             {
                 return this.districts;
             }
+
             set
             {
                 this.districts = value;

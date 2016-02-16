@@ -5,7 +5,8 @@
     using System.Data.Entity.Infrastructure;
     using System.Linq;
 
-    public class GenericRepository<T> : IRepository<T> where T : class
+    public class GenericRepository<T> : IRepository<T>
+        where T : class
     {
         public GenericRepository(DbContext context)
         {
@@ -96,7 +97,6 @@
         {
             this.Context.Dispose();
         }
-
 
         public T Find(object id)
         {

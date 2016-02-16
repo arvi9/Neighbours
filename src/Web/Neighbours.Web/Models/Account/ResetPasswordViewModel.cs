@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-
-namespace Neighbours.Web.Models.Account
+﻿namespace Neighbours.Web.Models.Account
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class ResetPasswordViewModel
     {
         [Required]
@@ -26,5 +22,4 @@ namespace Neighbours.Web.Models.Account
 
         public string Code { get; set; }
     }
-
 }
