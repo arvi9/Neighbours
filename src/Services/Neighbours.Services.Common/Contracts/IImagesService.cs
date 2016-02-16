@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Neighbours.Services.Common.Contracts
+﻿namespace Neighbours.Services.Common.Contracts
 {
-    interface IImagesService
+    using Neighbours.Data.Models;
+
+    public interface IImagesService : IService
     {
     }
 }

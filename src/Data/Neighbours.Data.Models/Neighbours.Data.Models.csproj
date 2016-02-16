@@ -93,6 +93,7 @@
     <Compile Include="CommunityImage.cs" />
     <Compile Include="District.cs" />
     <Compile Include="FileInfo.cs" />
+    <Compile Include="Gender.cs" />
     <Compile Include="Post.cs" />
     <Compile Include="PostImage.cs" />
     <Compile Include="ProfileImage.cs" />

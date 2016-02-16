@@ -1,73 +1,111 @@
 ﻿@model Neighbours.Web.Models.Account.RegisterViewModel
+@using Neighbours.Data.Models
 @{
     ViewBag.Title = "Register";
 }
 
 <h2>@ViewBag.Title.</h2>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype= "multipart/form-data" }))
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal col-md-8 col-md-offset-2", role = "form", enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <h4>Create a new account.</h4>
     <hr />
-    @Html.ValidationSummary("", new { @class = "alert alert-danger" })
+    @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
     <div class="form-group">
         @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.Kendo().TextBoxFor(m => m.UserName).HtmlAttributes(new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "alert alert-danger" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.Kendo().TextBoxFor(m => m.FirstName).HtmlAttributes(new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "alert alert-danger" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.Kendo().TextBoxFor(m=>m.LastName).HtmlAttributes(new { @class = "form-control" })
+            @Html.Kendo().TextBoxFor(m => m.LastName).HtmlAttributes(new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "alert alert-danger" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.BirthDate, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.Kendo().DatePickerFor(m => m.BirthDate)
+            @Html.ValidationMessageFor(m => m.BirthDate, "", new { @class = "alert alert-danger" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        
+
         <div class="col-md-10">
             @Html.Kendo().TextBoxFor(m => m.Email).HtmlAttributes(new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "alert alert-danger" })
         </div>
-        <div></div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.Kendo().TextBoxFor(m => m.Password).HtmlAttributes(new { @class = "form-control", type = "password" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "alert alert-danger" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+        <div class="col-md-6">
             @Html.Kendo().TextBoxFor(m => m.ConfirmPassword).HtmlAttributes(new { @class = "form-control", type = "password" })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "alert alert-danger" })
         </div>
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.ProfileImage, new { @class = "col-md-2 control-label" })
-        <div class="col-md-5">
-            @Html.Kendo().Upload().Name("profileImage").HtmlAttributes(new { @class = "form-control" }).Multiple(false)
+        <div class="col-md-4">
+            @Html.Kendo().Upload().Name("file").HtmlAttributes(new { @class = "form-control", accept = "image/*" }).Multiple(false).Events(events => events.Select("onSelect")).Events(events => events.Remove("onRemove"))
+            @Html.ValidationMessageFor(m => m.ProfileImage, "", new { @class = "alert alert-danger" })
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
+
+    <div id="radioGroup" class="form-group">
+        @Html.LabelFor(m => m.Gender, new { @class = "col-md-2 radio inline control-label" })
+        <div class="form-inline col-md-6 col-md-offset-0">
+            <div class="controls-row">
+                <label class="radio inline">
+                    @(Html.Kendo().RadioButton().Name("maleRadio").Checked(true).Value(Gender.Male).HtmlAttributes(new { @name = "myGender" }).Label("Male"))
+                </label>
+                <label class="radio inline">
+                    @(Html.Kendo().RadioButton().Name("femaleRadio").Checked(false).Value(Gender.Female).HtmlAttributes(new { @name = "myGender" }).Label("Female"))
+                </label>
+                <label class="radio inline">
+                    @(Html.Kendo().RadioButton().Name("otherRadio").Checked(false).Value(Gender.Other).HtmlAttributes(new { @name = "myGender" }).Label("Other"))
+                </label>
+            </div>
         </div>
     </div>
+        <div id="imgShow" class="form-group">
+            <label class="col-md-2 control-label">Selected Profile Image</label>
+            <div class="col-md-5">
+                <img width="100" src="data:image/jpeg;base64,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" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Register" />
+            </div>
+        </div>
 }
+
+<script>
+
+</script>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/site/profile-image.js")
 }

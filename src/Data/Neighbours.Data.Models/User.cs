@@ -36,9 +36,11 @@
         [DisplayName("Date of birth")]
         public DateTime? BirthDate { get; set; }
 
-        public ProfileImage ProfileImage { get; set; }
+        public virtual ProfileImage ProfileImage { get; set; }
 
-        public ICollection<Post> Posts
+        public Gender Gender { get; set; }
+
+        public virtual ICollection<Post> Posts
         {
             get
             {
@@ -51,7 +53,7 @@
             }
         }
 
-        public ICollection<Community> Communities
+        public virtual ICollection<Community> Communities
         {
             get
             {

@@ -5,11 +5,13 @@
     using System.Web;
     using System.Web.Mvc;
     using App_Start;
+    using AutoMapper;
+    using Common.Utilities;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.Owin;
     using Microsoft.Owin.Security;
+    using Models.Account;
     using Neighbours.Data.Models;
-    using Neighbours.Web.Models.Account;
 
     [Authorize]
     public class AccountController : Controller
@@ -19,8 +21,11 @@
         private ApplicationSignInManager signInManager;
         private ApplicationUserManager userManager;
 
-        public AccountController()
+        private IMapper mapper;
+
+        public AccountController(IMapper mapper)
         {
+            this.mapper = mapper;
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -153,16 +158,28 @@
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model, HttpPostedFileBase profileImage)
+        public async Task<ActionResult> Register(RegisterViewModel model, HttpPostedFileBase file)
         {
+            if (file != null)
+            {
+                var isImage = FileUtils.IsImage(file);
+
+                if (!isImage)
+                {
+                    this.ModelState.AddModelError("ProfileImage", "The file should be an image");
+                }
+            }
+
             if (this.ModelState.IsValid)
             {
-                var user = new User {
+                var user = new User
+                {
                     UserName = model.UserName,
                     Email = model.Email,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
-                    BirthDate = model.BirthDate
+                    BirthDate = model.BirthDate,
+                    Gender = model.Gender
                 };
 
                 var result = await this.UserManager.CreateAsync(user, model.Password);
@@ -430,7 +447,7 @@
             base.Dispose(disposing);
         }
 
-                private void AddErrors(IdentityResult result)
+        private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
             {
