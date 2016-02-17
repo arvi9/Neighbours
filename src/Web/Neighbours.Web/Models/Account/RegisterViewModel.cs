@@ -7,7 +7,7 @@
     public class RegisterViewModel
     {
         [Required]
-        [Display(Name = "FirstName")]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         [Required]
@@ -18,9 +18,10 @@
         public DateTime BirthDate { get; set; }
 
         [Required]
-        [Display(Name = "User Name")]
+        [Display(Name = "Username")]
         public string UserName { get; set; }
 
+        [Display(Name = "Profile Image")]
         public ProfileImage ProfileImage { get; set; }
 
         [Required]

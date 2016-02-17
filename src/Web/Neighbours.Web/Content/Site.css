@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 60px;
     padding-bottom: 20px;
     font-family: 'Ubuntu', sans-serif;
 }
@@ -25,11 +25,37 @@ textarea {
 }
 
 
-.field-validation-valid
-{
+.field-validation-valid {
     display: none;
 }
-.validation-summary-valid
-{
+
+.validation-summary-valid {
     display: none;
+}
+
+/*Kendo upload button*/
+.k-button.k-upload-button {
+    color: #fff;
+    background-color: #428bca;
+    border-color: #357ebd;
+    cursor: pointer;
+}
+
+.k-button.k-upload-button:hover {
+    cursor: pointer;
+    background-color: deepskyblue;
+    border-color: deepskyblue;
+}
+
+.my-alert{
+    padding: 5px;
+    vertical-align:middle;
+}
+
+.datepicker-block{
+    display:block;
+}
+
+.modal-content{
+    padding:20px;
 }

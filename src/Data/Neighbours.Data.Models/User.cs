@@ -36,6 +36,7 @@
         [DisplayName("Date of birth")]
         public DateTime? BirthDate { get; set; }
 
+        [Display(Name = "Profile Image")]
         public virtual ProfileImage ProfileImage { get; set; }
 
         public Gender Gender { get; set; }

@@ -12,6 +12,8 @@
     using Microsoft.Owin.Security;
     using Models.Account;
     using Neighbours.Data.Models;
+    using Services.Common.Contracts;
+    using System.IO;
 
     [Authorize]
     public class AccountController : Controller
@@ -22,10 +24,12 @@
         private ApplicationUserManager userManager;
 
         private IMapper mapper;
+        private IImagesService images;
 
-        public AccountController(IMapper mapper)
+        public AccountController(IMapper mapper, IImagesService images)
         {
             this.mapper = mapper;
+            this.images = images;
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -168,7 +172,11 @@
                 {
                     this.ModelState.AddModelError("ProfileImage", "The file should be an image");
                 }
+
+                file.SaveAs(this.Server.MapPath(Path.Combine("~/Content/imgs/", file.FileName)));
             }
+
+            var avatar = this.images.GetProfileImage(file);
 
             if (this.ModelState.IsValid)
             {
@@ -179,7 +187,8 @@
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     BirthDate = model.BirthDate,
-                    Gender = model.Gender
+                    Gender = model.Gender,
+                    ProfileImage = avatar
                 };
 
                 var result = await this.UserManager.CreateAsync(user, model.Password);
