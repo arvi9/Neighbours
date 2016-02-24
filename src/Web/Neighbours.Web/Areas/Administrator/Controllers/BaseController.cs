@@ -1,4 +1,4 @@
-﻿namespace Neighbours.Web.Areas.Administrator.Controllers
+﻿namespace Neighbours.Web.Areas.Private.Controllers
 {
     using System.Web.Mvc;
     using AutoMapper;

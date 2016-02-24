@@ -1,0 +1,57 @@
+﻿@using Kendo.Mvc.UI
+@{
+    ViewBag.Title = "Communities admin page";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+@(Html.Kendo().Grid<Neighbours.Web.Areas.Administrator.Models.Users.UserViewModelAdmin>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.UserName);
+          columns.Bound(c => c.ProfileImage).ClientTemplate("<img src=" + "#=ProfileImage#" + " alt='#=UserName #' Title='#=UserName #' width='75'/>");
+          columns.Bound(c => c.FirstName);
+          columns.Bound(c => c.LastName);
+          columns.Command(command =>
+          {
+              command.Edit().Text("Accept").UpdateText("Yes").CancelText("No");
+              command.Destroy().Text("Deny");
+          });
+      })
+
+      .ColumnMenu()
+      .Editable(editable => editable.Mode(GridEditMode.PopUp))
+      .Pageable()
+      .Navigatable()
+      .Sortable(sortable =>
+      {
+          sortable.SortMode(GridSortMode.MultipleColumn);
+      })
+      .Filterable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model =>
+          {
+              model.Id(p => p.Id);
+              model.Field(m => m.Id).Editable(false);
+              model.Field(m => m.ProfileImage).Editable(false);
+              model.Field(m => m.FirstName).Editable(false);
+              model.Field(m => m.UserName).Editable(false);
+              model.Field(m => m.LastName).Editable(false);
+          })
+          .Read(read => read.Action("UsersRead", "Users"))
+          .Update(update => update.Action("UsersAccept", "Users"))
+          .Destroy(delete => delete.Action("UsersDeny", "Users"))
+          .PageSize(5)
+      )
+)
+
+@section Scripts {
+    <script src="http://maps.google.com/maps/api/js?language=bg-BG&libraries=places" type="text/javascript"></script>
+
+    @Scripts.Render("~/Scripts/underscore-min.js")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/site/community-image.js")
+    @Scripts.Render("~/Scripts/site/map-community-create.js")
+}

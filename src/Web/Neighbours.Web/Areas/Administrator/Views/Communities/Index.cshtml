@@ -1,0 +1,54 @@
+﻿@using Kendo.Mvc.UI
+@{
+    ViewBag.Title = "Communities admin page";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+@(Html.Kendo().Grid<Neighbours.Web.Areas.Administrator.Models.Communities.CommunityViewModel>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.Id).Hidden();
+          columns.Bound(c => c.ImageUrl).ClientTemplate("<a href='/Administrator/Communities/Details/"+ "#=Id#'" + "><img src=" + "#=ImageUrl#" + " alt='#=Name #' Title='#=Name #' width='150'/></a>");
+          columns.Bound(c => c.Name);
+          columns.Bound(c => c.City);
+          columns.Bound(c => c.District);
+          columns.Bound(c => c.Users);
+          columns.Command(command => { command.Edit(); command.Destroy(); });
+      })
+
+      .ColumnMenu()
+      .Editable(editable => editable.Mode(GridEditMode.PopUp))
+      .Pageable()
+      .Navigatable()
+      .Sortable(sortable =>
+      {
+          sortable.SortMode(GridSortMode.MultipleColumn);
+      })
+      .Filterable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model =>
+          {
+              model.Id(p => p.Id);
+              model.Field(m => m.Id).Editable(false);
+              model.Field(m => m.City).Editable(false);
+              model.Field(m => m.District).Editable(false);
+              model.Field(m => m.Users).Editable(false);
+          })
+          .Read(read => read.Action("CommunitiesRead", "Communities"))
+          .Update(update => update.Action("CommunitiesUpdate", "Communities"))
+          .Destroy(destroy => destroy.Action("CommunitiesDestroy", "Communities"))
+          .PageSize(3)
+      )
+)
+
+@section Scripts {
+    <script src="http://maps.google.com/maps/api/js?language=bg-BG&libraries=places" type="text/javascript"></script>
+
+    @Scripts.Render("~/Scripts/underscore-min.js")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/site/community-image.js")
+    @Scripts.Render("~/Scripts/site/map-community-create.js")
+}

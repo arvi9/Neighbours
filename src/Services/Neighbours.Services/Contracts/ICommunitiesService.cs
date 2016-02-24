@@ -23,5 +23,13 @@
         void Cancel(string userId, int communityId);
 
         void Leave(string userId, int communityId);
+
+        IQueryable<Community> GetAllMine(string userId);
+
+        void UpdateName(int id, string name);
+
+        void Delete(int id);
+
+
     }
 }

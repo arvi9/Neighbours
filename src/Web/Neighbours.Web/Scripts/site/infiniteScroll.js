@@ -14,6 +14,8 @@ function loadMoreToInfiniteScrollTable(loadMoreRowsUrl) {
         inCallback = true;
         page++;
         $("div#loading").show();
+        setTimeout(function () {
+        
         $.ajax({
             type: 'GET',
             url: loadMoreRowsUrl,
@@ -32,6 +34,7 @@ function loadMoreToInfiniteScrollTable(loadMoreRowsUrl) {
             error: function (XMLHttpRequest, textStatus, errorThrown) {
             }
         });
+        }, 1000)
     }
 }
 

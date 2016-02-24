@@ -112,6 +112,8 @@
 
             var community = this.communities.GetAll().To<CommunityDetailsViewModel>().FirstOrDefault(c => c.Id == id);
 
+            this.users.AddCommunityToWait(userId, id);
+
             return this.PartialView("_PartialButtonsBadges", community);
         }
 

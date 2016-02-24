@@ -215,6 +215,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\ViewEnginesConfig.cs" />
     <Compile Include="Areas\Administrator\AdministratorAreaRegistration.cs" />
+    <Compile Include="Areas\Administrator\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\CommunitiesController.cs" />
+    <Compile Include="Areas\Administrator\Controllers\UsersController.cs" />
+    <Compile Include="Areas\Administrator\Models\Communities\CommunityViewModel.cs" />
+    <Compile Include="Areas\Administrator\Models\Users\UserViewModelAdmin.cs" />
     <Compile Include="Areas\Private\Controllers\BaseController.cs" />
     <Compile Include="Areas\Private\Controllers\CommunitiesController.cs" />
     <Compile Include="Areas\Private\Models\Communities\CommunityAddViewModel.cs" />
@@ -430,6 +435,11 @@
     <Content Include="Areas\Private\Views\Shared\_MapPartialDetails.cshtml" />
     <Content Include="Areas\Private\Views\Communities\_PartialButtonsBadges.cshtml" />
     <Content Include="Areas\Administrator\Views\web.config" />
+    <Content Include="Areas\Administrator\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Administrator\Views\Communities\Index.cshtml" />
+    <Content Include="Areas\Administrator\Views\Communities\EditorTemplates\CommunityViewModel.cshtml" />
+    <Content Include="Areas\Administrator\Views\Users\EditorTemplates\UserViewModelAdmin.cshtml" />
+    <Content Include="Areas\Administrator\Views\Communities\Details.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -448,6 +458,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\site\community-image.js" />
     <Content Include="Scripts\site\infiniteScroll.js" />
+    <Content Include="Scripts\site\map-community-update.js" />
     <Content Include="Scripts\site\map-community-details.js" />
     <Content Include="Scripts\site\map-community-create.js" />
     <Content Include="Scripts\site\profile-image.js" />
@@ -496,10 +507,9 @@
     <Content Include="Views\Statistics\_StatisticsPartial.cshtml" />
     <Content Include="Views\Home\All.cshtml" />
     <Content Include="Views\Shared\_NavigationPartial.cshtml" />
+    <Content Include="Views\Home\_Loading.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Administrator\Controllers\" />
-    <Folder Include="Areas\Administrator\Models\" />
     <Folder Include="Areas\Administrator\Views\Shared\" />
     <Folder Include="Content\kendo\Black\" />
     <Folder Include="Content\kendo\BlueOpal\" />

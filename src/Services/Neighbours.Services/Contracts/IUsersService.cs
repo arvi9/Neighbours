@@ -15,5 +15,14 @@
         User GetById(string id);
 
         void AddToRole(string userId, string role);
+
+        IQueryable<User> GetAllPending(int id);
+
+        void AddCommunityToWait(string userId, int id);
+
+        void AddToCommunity(string userId, int id);
+
+        void Deny(string userId, int id);
+
     }
 }

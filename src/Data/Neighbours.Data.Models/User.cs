@@ -11,6 +11,7 @@
     using Microsoft.AspNet.Identity.EntityFramework;
     using Neighbours.Common.GlobalConstants;
     using Neighbours.Common.ValidationAttributes;
+    using System.Linq;
 
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class User : IdentityUser
@@ -24,6 +25,7 @@
             this.posts = new HashSet<Post>();
             this.communities = new HashSet<Community>();
             this.likes = new HashSet<Like>();
+            this.WaitingList = "|";
         }
 
         [Required]
@@ -46,6 +48,22 @@
         public virtual ProfileImage ProfileImage { get; set; }
 
         public Gender Gender { get; set; }
+
+        public string WaitingList { get; set; }
+
+        [NotMapped]
+        public int[] WaitingListCommunities
+        {
+            get
+            {
+                return this.WaitingList.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries).Select(int.Parse).ToArray();
+            }
+
+            set
+            {
+                this.WaitingList = string.Join("|", value);
+            }
+        }
 
         public virtual ICollection<Post> Posts
         {

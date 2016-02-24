@@ -1,21 +1,21 @@
 ﻿namespace Neighbours.Services.Data
 {
+    using System;
     using System.Linq;
     using Common.Contracts;
     using Contracts;
     using Neighbours.Data.Common.Repositories;
     using Neighbours.Data.Models;
-    using System;
 
     public class CommunitiesService : ICommunitiesService
     {
         private IDeletableEntityRepository<Community> communities;
         private IDistrictsService districts;
         private ICitiesService cities;
-        private IUsersService users;
+        private IRepository<User> users;
         private IIdentifierProvider provider;
 
-        public CommunitiesService(IDeletableEntityRepository<Community> communities, IDistrictsService districts, ICitiesService cities, IUsersService users, IIdentifierProvider provider)
+        public CommunitiesService(IDeletableEntityRepository<Community> communities, IDistrictsService districts, ICitiesService cities, IRepository<User> users, IIdentifierProvider provider)
         {
             this.communities = communities;
             this.districts = districts;
@@ -98,6 +98,10 @@
 
             var waitingList = communityToJoin.WaitingUsersList;
 
+            var userListWaiting = user.WaitingListCommunities.ToList();
+            userListWaiting.Remove(communityToJoin.Id);
+
+            user.WaitingListCommunities = userListWaiting.ToArray();
             var list = waitingList.ToList();
 
             list.Remove(userId);
@@ -105,11 +109,32 @@
             communityToJoin.WaitingUsersList = list.ToArray();
 
             this.communities.SaveChanges();
+            this.users.SaveChanges();
         }
 
         public void Leave(string userId, int communityId)
         {
             throw new NotImplementedException();
+        }
+
+        public IQueryable<Community> GetAllMine(string userId)
+        {
+            return this.communities.All()
+                .Where(c => c.CreatorId == userId || c.Users.FirstOrDefault(x => x.Id == userId) != null);
+        }
+
+        public void UpdateName(int id, string name)
+        {
+            var community = this.communities.GetById(id);
+
+            community.Name = name;
+            this.communities.SaveChanges();
+        }
+
+        public void Delete(int id)
+        {
+            this.communities.Delete(id);
+            this.communities.SaveChanges();
         }
     }
 }

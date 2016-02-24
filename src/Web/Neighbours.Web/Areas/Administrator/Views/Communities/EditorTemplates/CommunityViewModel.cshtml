@@ -1,0 +1,13 @@
+﻿@model Neighbours.Web.Areas.Administrator.Models.Communities.CommunityViewModel
+
+<h3>Edit Community Name</h3>
+<br />
+@Html.HiddenFor(model => model.Id)
+<div>
+    @Html.LabelFor(m => m.Name, new { @class = "col-md-4 control-label" })
+</div>
+<div>
+    @Html.Kendo().TextBoxFor(m => m.Name).HtmlAttributes(new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.Name, "", new { @class = "alert alert-danger my-alert" })
+</div>
+

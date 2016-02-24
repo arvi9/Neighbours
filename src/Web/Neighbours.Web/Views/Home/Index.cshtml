@@ -13,7 +13,7 @@
     @Html.Partial("_CommunityRow", Model)
 
 </div>
-@*@Html.Partial("_Loading")*@
+@Html.Partial("_Loading")
 @section scripts{
     <script src="~/Scripts/site/infiniteScroll.js"></script>
     <script type="text/javascript">
@@ -21,6 +21,7 @@
             $("div#loading").hide();
         });
         var moreRowsUrl = '/Home/GetCommunities';
+
         $(window).scroll(scrollHandler);
         //var interval = null;
         //(function () {

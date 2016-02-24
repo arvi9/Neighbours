@@ -102,7 +102,7 @@
                         UserName = "super@site.com",
                         Gender = Gender.Other,
                         BirthDate = new DateTime(1980, 1, 1),
-                        ProfileImageId = 1
+                        ProfileImageId = 1,
                     };
 
                     userManager.Create(newSuper, "super");

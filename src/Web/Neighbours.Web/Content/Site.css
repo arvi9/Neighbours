@@ -74,6 +74,10 @@ textarea {
   flex-direction: row;
 }
 
+.dropdown-menu{
+    background-color:#325375    ;
+}
+
 .wrapped-text{
     word-wrap: break-word;
 }
