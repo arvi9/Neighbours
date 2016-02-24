@@ -21,7 +21,7 @@
       })
 
       .ColumnMenu()
-      .Editable(editable => editable.Mode(GridEditMode.PopUp))
+      .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("UserViewModelAdmin"))
       .Pageable()
       .Navigatable()
       .Sortable(sortable =>
@@ -36,7 +36,7 @@
               model.Id(p => p.Id);
               model.Field(m => m.Id).Editable(false);
               model.Field(m => m.ProfileImage).Editable(false);
-              model.Field(m => m.FirstName).Editable(false);
+              model.Field(m => m.FirstName).Editable(true);
               model.Field(m => m.UserName).Editable(false);
               model.Field(m => m.LastName).Editable(false);
           })
@@ -48,10 +48,8 @@
 )
 
 @section Scripts {
-    <script src="http://maps.google.com/maps/api/js?language=bg-BG&libraries=places" type="text/javascript"></script>
-
-    @Scripts.Render("~/Scripts/underscore-min.js")
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/Scripts/site/community-image.js")
-    @Scripts.Render("~/Scripts/site/map-community-create.js")
+    <script>
+
+    </script>
 }

@@ -20,6 +20,8 @@
 
         public string ProfileImage { get; set; }
 
+        public string ForUpdate { get; set; }
+
         public List<string> Communities { get; set; }
 
         public void CreateMappings(IMapperConfiguration configuration)

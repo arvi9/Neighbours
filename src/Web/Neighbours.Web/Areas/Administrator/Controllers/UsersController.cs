@@ -35,6 +35,7 @@
             return this.Json(result, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
         public ActionResult UsersAccept([DataSourceRequest]DataSourceRequest request, UserViewModelAdmin model)
         {
             var id = this.Request.UrlReferrer.Segments[this.Request.UrlReferrer.Segments.Count() - 1];

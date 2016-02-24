@@ -10,6 +10,7 @@
     using Infrastructure.Mapping;
     using Services.Common;
     using Services.Common.Contracts;
+    using Web.Models;
 
     public class CommunityDetailsViewModel : IMapFrom<Community>, IHaveCustomMappings
     {

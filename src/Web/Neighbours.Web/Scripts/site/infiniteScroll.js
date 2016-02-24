@@ -20,8 +20,11 @@ function loadMoreToInfiniteScrollTable(loadMoreRowsUrl) {
             type: 'GET',
             url: loadMoreRowsUrl,
             data: "pageNum=" + page,
-            success: function (data, textstatus) {
-                if (data != '') {
+            
+            success: function (data, textstatus){ 
+                var dataRep = data.replace(/(?:\r\n|\r|\n)/g, '');;
+                if (data != '' && dataRep != '') {
+                    console.log(dataRep);
                     $("div.infinite-scroll").append(data);
                 }
                 else {
@@ -35,6 +38,8 @@ function loadMoreToInfiniteScrollTable(loadMoreRowsUrl) {
             }
         });
         }, 1000)
+    } else {
+        hasReachedEndOfInfiniteScroll = true;
     }
 }
 

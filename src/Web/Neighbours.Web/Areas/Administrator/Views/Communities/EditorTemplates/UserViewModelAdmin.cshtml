@@ -1,0 +1,29 @@
+﻿@model Neighbours.Web.Areas.Administrator.Models.Users.UserViewModelAdmin
+
+
+<h3>Add User to Community?</h3>
+<br />
+@Html.HiddenFor(model => model.Id, new { id = "myId" })
+<div>
+    @Html.LabelFor(m => m.ForUpdate, new { @class = "col-md-4 control-label" })
+</div>
+<div>
+    @Html.Kendo().TextBoxFor(m => m.ForUpdate).HtmlAttributes(new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m.ForUpdate, "", new { @class = "alert alert-danger my-alert" })
+</div>
+
+@*<script>
+        var pathname = window.location.pathname.split("/");
+        var myId = pathname[pathname.length - 1];
+
+        $('#test').next().next().find('.k-grid-update').on('click', function () {
+            $.ajax({
+                url: "/Administrator/Users/UsersAccept",
+                method: 'POST'
+            });
+        })
+
+
+    </script>*@
+
+

@@ -55,6 +55,8 @@
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             //modelBuilder.Entity<Community>().Property(c => c.Latitude).HasPrecision
+            modelBuilder.Entity<User>().HasMany(u => u.Communities).WithMany(c => c.Users);
+            modelBuilder.Entity<User>().HasMany(u => u.Communities).WithMany(c => c.Admins);
             base.OnModelCreating(modelBuilder);
         }
 

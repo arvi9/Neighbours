@@ -57,7 +57,7 @@
                this.Cache.Get(
                    "Communities",
                    () => this.communities.GetAll().To<CommunityViewModel>().ToList(),
-                1 * 60);
+                10 * 60);
         }
 
         public IEnumerable<CommunityViewModel> GetRecordsForPage(int pageNum)
@@ -66,7 +66,7 @@
                this.Cache.Get(
                    "Communities",
                    () => this.communities.GetAll().To<CommunityViewModel>().ToList(),
-                1 * 60);
+                10 * 60);
 
             int from = pageNum * RecordsPerPage;
             int to = from + RecordsPerPage;

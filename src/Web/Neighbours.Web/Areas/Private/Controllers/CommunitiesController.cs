@@ -52,6 +52,13 @@
             return this.View(this.Mapper.Map<CommunityDetailsViewModel>(community));
         }
 
+        public ActionResult My()
+        {
+            var userId = this.User.Identity.GetUserId();
+            var communities = this.communities.GetAll().Where(c => c.Creator.Id == userId).To<CommunityViewModel>();
+            return this.View(communities);
+        }
+
         [HttpGet]
         public ActionResult Create()
         {

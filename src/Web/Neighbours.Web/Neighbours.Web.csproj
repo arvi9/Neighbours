@@ -440,6 +440,9 @@
     <Content Include="Areas\Administrator\Views\Communities\EditorTemplates\CommunityViewModel.cshtml" />
     <Content Include="Areas\Administrator\Views\Users\EditorTemplates\UserViewModelAdmin.cshtml" />
     <Content Include="Areas\Administrator\Views\Communities\Details.cshtml" />
+    <Content Include="Areas\Administrator\Views\Communities\EditorTemplates\UserViewModelAdmin.cshtml" />
+    <Content Include="Areas\Private\Views\Communities\_CommunityRow.cshtml" />
+    <Content Include="Areas\Private\Views\Communities\_Loading.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -508,6 +511,7 @@
     <Content Include="Views\Home\All.cshtml" />
     <Content Include="Views\Shared\_NavigationPartial.cshtml" />
     <Content Include="Views\Home\_Loading.cshtml" />
+    <Content Include="Areas\Private\Views\Communities\My.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Administrator\Views\Shared\" />

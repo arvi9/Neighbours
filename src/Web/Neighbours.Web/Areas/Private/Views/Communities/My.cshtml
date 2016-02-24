@@ -1,11 +1,7 @@
-﻿@model IEnumerable<Neighbours.Web.Models.Communities.CommunityViewModel>
+﻿@model IEnumerable<Neighbours.Web.Areas.Private.Models.Communities.CommunityViewModel>
 @using Neighbours.Web.Models.Communities
 @{
-    ViewBag.Title = "Communities Home";
-}
-
-@{
-    Html.RenderAction("Index", "Statistics");
+    ViewBag.Title = "Communities Mine";
 }
 
 <div class="container infinite-scroll row-mine">
