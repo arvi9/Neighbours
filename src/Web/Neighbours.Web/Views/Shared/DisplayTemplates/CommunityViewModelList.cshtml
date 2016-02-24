@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Neighbours.Web.Models.Communities.CommunityViewModel>
+
+
+@foreach (var item in Model)
+{
+    <div class="col-md-4">
+        <div class="community-short">
+            @Html.DisplayFor(i => item, "CommunityViewModelShort")
+        </div>
+    </div>
+}
+
+
+

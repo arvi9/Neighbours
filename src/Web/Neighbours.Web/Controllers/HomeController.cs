@@ -5,44 +5,76 @@
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
-    using AutoMapper;
+    using Infrastructure.Mapping;
+    using Microsoft.AspNet.Identity;
+    using Models.Communities;
     using Neighbours.Data.Models;
     using Neighbours.Services.Data.Contracts;
     using Neighbours.Web.Models;
 
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private IUserServices users;
-        private IMapper mapper;
+        public const int RecordsPerPage = 6;
+        private IUsersService users;
+        private ICommunitiesService communities;
 
-        public HomeController(IUserServices users, IMapper mapper)
+        public HomeController(IUsersService users, ICommunitiesService communities)
         {
             this.users = users;
-            this.mapper = mapper;
+            this.communities = communities;
         }
 
         public ActionResult Index()
         {
-            var user = this.users.GetById("cd6eeb2f-4bc3-4c0e-a991-23d748e072ec");
-
-            var dto = this.mapper.Map<User, UserViewModel>(user);
-
-            this.ViewBag.User = dto;
-            return this.View();
+            return this.RedirectToAction("GetCommunities");
         }
 
-        public ActionResult About()
+        public ActionResult All()
         {
-            this.ViewBag.Message = "Your application description page.";
-
-            return this.View();
+            var communities = this.communities.GetAll().To<CommunityViewModel>();
+            return this.View(communities);
         }
 
-        public ActionResult Contact()
+        public ActionResult GetCommunities(int? pageNum)
         {
-            this.ViewBag.Message = "Your contact page.";
+            pageNum = pageNum ?? 0;
+            if (this.Request.IsAjaxRequest())
+            {
+                var communities = this.GetRecordsForPage(pageNum.Value);
+                return this.PartialView("_CommunityRow", communities);
+            }
+            else
+            {
+                this.LoadAllCommunitiesToCache();
+                var firstList = this.GetRecordsForPage(0);
+                return this.View("Index", firstList);
+            }
+        }
 
-            return this.View();
+        public void LoadAllCommunitiesToCache()
+        {
+            var communities =
+               this.Cache.Get(
+                   "Communities",
+                   () => this.communities.GetAll().To<CommunityViewModel>().ToList(),
+                1 * 60);
+        }
+
+        public IEnumerable<CommunityViewModel> GetRecordsForPage(int pageNum)
+        {
+            var communities =
+               this.Cache.Get(
+                   "Communities",
+                   () => this.communities.GetAll().To<CommunityViewModel>().ToList(),
+                1 * 60);
+
+            int from = pageNum * RecordsPerPage;
+            int to = from + RecordsPerPage;
+
+            return communities
+                .OrderBy(x => x.Id)
+                .Skip(from)
+                .Take(RecordsPerPage);
         }
     }
 }

@@ -8,7 +8,7 @@
     using System.Threading.Tasks;
     using Neighbours.Data.Common.Constants;
 
-    public abstract class FileInfo
+    public abstract class FileInfoModel
     {
         public int Id { get; set; }
 
@@ -21,5 +21,7 @@
         public string FileExtension { get; set; }
 
         public string UrlPath { get; set; }
+
+        public string NewFileName { get; set; }
     }
 }

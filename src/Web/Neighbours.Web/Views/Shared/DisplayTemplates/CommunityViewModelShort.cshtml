@@ -1,0 +1,13 @@
+﻿@model Neighbours.Web.Models.Communities.CommunityViewModel
+@using Microsoft.AspNet.Identity
+
+@{var urlPath = Request.IsAuthenticated ? "/Private/Communities/Details/" + @Model.Url : "/Account/Login";}
+
+<div class="col-md-12">
+    <a href=@urlPath>
+        <img width="100%" src="@Url.Content(Path.Combine(Model.CommunityImage.UrlPath,Model.CommunityImage.NewFileName))" />
+    </a>
+</div>
+<div class="col-md-12">
+    <h3><a href=@urlPath>@Model.Name</a></h3>
+</div>

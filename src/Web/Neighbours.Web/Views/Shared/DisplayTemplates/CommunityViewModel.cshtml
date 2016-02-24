@@ -1,0 +1,26 @@
+﻿@model Neighbours.Web.Models.Communities.CommunityViewModel
+
+<div class="col-md-12">
+    <a href="/Account/Login">
+        <img class="col-md-12" src="@Url.Content(Path.Combine(Model.CommunityImage.UrlPath,Model.CommunityImage.NewFileName))" />
+    </a>
+</div>
+<div class="col-md-12">
+    <h3><a href="/Account/Login">@Model.Name</a></h3>
+</div>
+<div class="col-md-12">
+    <h5 class="wrapped-text">City: @Model.City</h5>
+
+    @{
+        if (Model.District == null)
+        {
+            <h5>Neighbourhood: N/A</h5>
+        }
+        else
+        {
+            <h5>Neighbourhood: @Model.District</h5>
+
+        }
+    }
+    <h5>Users: @Model.Users.Count()</h5>
+</div>

@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNet.Identity
+@if (this.User.Identity.IsAuthenticated)
+{
+    
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Communities", "All", "Communities", new { Area = "Private" }, new { } )</li>
+        <li>@Html.ActionLink("Create", "Create", "Communities", new { Area = "Private" }, new { })</li>
+        @if (this.User.IsInRole("Administrator"))
+        {
+            <li>@Html.ActionLink("Test", "Create", "Communities", "", new { area = "Private" })</li>
+        }
+    </ul>
+}
+else
+{
+
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Communities", "All", "Home")</li>
+    </ul>
+}

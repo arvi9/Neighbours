@@ -2,6 +2,8 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
+    using Neighbours.Common.GlobalConstants;
+    using Neighbours.Common.ValidationAttributes;
     using Neighbours.Data.Models;
 
     public class RegisterViewModel
@@ -15,6 +17,7 @@
         public string LastName { get; set; }
 
         [Display(Name = "Birth Date")]
+        [BirthDate(GlobalValidationConstants.MinBirthDate, GlobalValidationConstants.MinAgeToRegister, ErrorMessage = "{0} You are either too old or too young.")]
         public DateTime BirthDate { get; set; }
 
         [Required]

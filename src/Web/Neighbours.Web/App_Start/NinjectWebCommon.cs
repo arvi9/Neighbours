@@ -14,6 +14,7 @@ namespace Neighbours.Web.App_Start
     using Ninject;
     using Ninject.Extensions.Conventions;
     using Ninject.Web.Common;
+    using Services.Common;
     using Services.Common.Contracts;
 
     public static class NinjectWebCommon
@@ -67,7 +68,15 @@ namespace Neighbours.Web.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind(typeof(IRepository<>)).To(typeof(GenericRepository<>));
+
+            kernel.Bind(typeof(IDeletableEntityRepository<>)).To(typeof(DeletableEntityRepository<>));
+
+
             kernel.Bind<DbContext>().To<NeighboursDbContext>().InRequestScope();
+
+            kernel.Bind<ICacheService>().To(typeof(HttpCacheService));
+
+            kernel.Bind(typeof(IIdentifierProvider)).To(typeof(IdentifierProvider));
 
             // TODO: Check if exception for IService
             kernel.Bind(k => k
@@ -76,14 +85,6 @@ namespace Neighbours.Web.App_Start
                 .SelectAllClasses()
                 .InheritedFrom<IService>()
                 .BindDefaultInterface());
-
-            var types = AutoMapperConfig.GetTypesInAssembly();
-            var config = AutoMapperConfig.ConfigureAutomapper(types);
-
-            var mapper = config.CreateMapper();
-
-            kernel.Bind<MapperConfiguration>().ToMethod(c => config).InSingletonScope();
-            kernel.Bind<IMapper>().ToConstant(mapper);
         }
     }
 }

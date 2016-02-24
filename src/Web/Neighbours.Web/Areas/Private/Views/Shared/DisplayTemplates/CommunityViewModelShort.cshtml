@@ -1,0 +1,10 @@
+﻿@model Neighbours.Web.Areas.Private.Models.Communities.CommunityViewModel
+
+<div class="col-md-12">
+    <a href="/Private/Communities/Details/@Model.Url">
+        <img width="100%" src="@Url.Content(Path.Combine(Model.CommunityImage.UrlPath,Model.CommunityImage.NewFileName))" />
+    </a>
+</div>
+<div class="col-md-12">
+    <h3><a href="/Private/Communities/Details/@Model.Url">@Model.Name</a></h3>
+</div>

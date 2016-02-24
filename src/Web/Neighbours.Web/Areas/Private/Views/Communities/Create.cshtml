@@ -1,0 +1,86 @@
+﻿@model Neighbours.Web.Areas.Private.Models.Communities.CommunityAddViewModel
+@using Neighbours.Data.Models
+@{
+    ViewBag.Title = "Create Community";
+}
+
+@using (Html.BeginForm("Create", "Communities", FormMethod.Post, new { @class = "modal-content form-horizontal col-md-6", role = "form", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "" })
+    <fieldset>
+        <legend>Create New Community</legend>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name, new { @class = "col-md-4 control-label" })
+            <div class="col-md-6">
+                @Html.Kendo().TextBoxFor(m => m.Name).HtmlAttributes(new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "alert alert-danger my-alert" })
+            </div>
+        </div>
+
+        <div>
+            @Html.HiddenFor(m => m.City)
+            @Html.ValidationMessageFor(m => m.City, "", new { @class = "alert alert-danger my-alert" })
+
+            @Html.HiddenFor(m => m.District)
+            @Html.ValidationMessageFor(m => m.District, "", new { @class = "alert alert-danger my-alert" })
+
+            @Html.HiddenFor(m => m.Latitude)
+            @Html.ValidationMessageFor(m => m.Latitude, "", new { @class = "alert alert-danger my-alert" })
+
+            @Html.HiddenFor(m => m.Longitude)
+            @Html.ValidationMessageFor(m => m.Longitude, "", new { @class = "alert alert-danger my-alert" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Address, new { @class = "col-md-4 control-label" })
+            <div class="col-md-6">
+                @Html.Kendo().TextBoxFor(m => m.Address).HtmlAttributes(new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Address, "", new { @class = "alert alert-danger my-alert", id = "addressInput" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.CommunityImage, new { @class = "col-md-4 control-label" })
+            <div class="col-md-6">
+                @Html.Kendo().Upload().Name("file").Messages(m => m.Select("Choose image...")).HtmlAttributes(new { @class = "form-control btn btn-primary", accept = "image/*" }).Multiple(false).Events(events => events.Select("onSelect")).Events(events => events.Remove("onRemove"))
+                @Html.ValidationMessageFor(m => m.CommunityImage, "", new { @class = "alert alert-danger my-alert" })
+                <div id="wrongFileMsg" class="alert alert-info collapse">Please select an image file!</div>
+            </div>
+        </div>
+
+        <div id="imgShow" class="form-group">
+            <label class="col-md-4 control-label">Selected Community Image</label>
+            <div class="col-md-6">
+                <img width="200" src="@Url.Content("~/Content/imgs/default-cover.jpg")" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-5 col-md-6">
+                <input type="submit" class="btn btn-success" value="Create Community" />
+            </div>
+        </div>
+    </fieldset>
+}
+
+<div class="modal-content col-md-5 col-md-offset-1">
+    <div id="map_canvas" style="height: 300px;"></div>
+</div>
+
+
+<!-- This css is to ensure that the google map contols (zoom bar etc) show and size correctly. -->
+@*<style>
+    #map_canvas img {
+        max-width: none;
+    }
+</style>*@
+
+@section Scripts {
+    <script src="http://maps.google.com/maps/api/js?language=bg-BG&libraries=places" type="text/javascript"></script>
+
+    @Scripts.Render("~/Scripts/underscore-min.js")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/site/community-image.js")
+    @Scripts.Render("~/Scripts/site/map-community-create.js")
+}

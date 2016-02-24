@@ -18,21 +18,21 @@
 
         public virtual IDbSet<ProfileImage> ProfileImages { get; set; }
 
-        public virtual IDbSet<Community> Communities { get; set; }
-
         public virtual IDbSet<CommunityImage> CommunityImages { get; set; }
+
+        public virtual IDbSet<IdentityUserRole> UserRoles { get; set; }
+
+        public virtual IDbSet<PostImage> PostImages { get; set; }
+
+        public virtual IDbSet<Community> Communities { get; set; }
 
         public virtual IDbSet<City> Cities { get; set; }
 
         public virtual IDbSet<Comment> Comments { get; set; }
 
-        public virtual IDbSet<CommentImage> CommentImages { get; set; }
-
         public virtual IDbSet<District> Districts { get; set; }
 
         public virtual IDbSet<Post> Posts { get; set; }
-
-        public virtual IDbSet<PostImage> PostImages { get; set; }
 
         public static NeighboursDbContext Create()
         {
@@ -54,7 +54,7 @@
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            // modelBuilder.Entity<Comment>().HasOptional(x => x.CommentImage).WithRequired(x => x.Comment).WillCascadeOnDelete(false);
+            //modelBuilder.Entity<Community>().Property(c => c.Latitude).HasPrecision
             base.OnModelCreating(modelBuilder);
         }
 

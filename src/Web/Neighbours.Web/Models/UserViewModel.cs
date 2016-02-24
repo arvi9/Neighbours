@@ -8,15 +8,17 @@
     using Neighbours.Data.Models;
     using Neighbours.Web.Infrastructure.Mapping;
 
-    public class UserViewModel : Profile
+    public class UserViewModel : IMapFrom<User>, IHaveCustomMappings
     {
         public string Id { get; set; }
 
         public string UserName { get; set; }
 
-        protected override void Configure()
+        public ProfileImage ProfileImage { get; set; }
+
+        public void CreateMappings(IMapperConfiguration configuration)
         {
-            this.CreateMap<User, UserViewModel>()
+            configuration.CreateMap<User, UserViewModel>()
                 .ForMember(u => u.Id, opts => opts.MapFrom(g => g.Id))
                 .ForMember(u => u.UserName, opts => opts.MapFrom(g => g.UserName));
         }

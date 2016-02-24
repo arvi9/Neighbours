@@ -1,5 +1,6 @@
 ﻿namespace Neighbours.Web.Controllers
 {
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web;
@@ -13,22 +14,20 @@
     using Models.Account;
     using Neighbours.Data.Models;
     using Services.Common.Contracts;
-    using System.IO;
+    using Services.Data.Contracts;
 
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
         private ApplicationSignInManager signInManager;
         private ApplicationUserManager userManager;
 
-        private IMapper mapper;
         private IImagesService images;
 
-        public AccountController(IMapper mapper, IImagesService images)
+        public AccountController(IImagesService images)
         {
-            this.mapper = mapper;
             this.images = images;
         }
 
@@ -164,20 +163,6 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model, HttpPostedFileBase file)
         {
-            if (file != null)
-            {
-                var isImage = FileUtils.IsImage(file);
-
-                if (!isImage)
-                {
-                    this.ModelState.AddModelError("ProfileImage", "The file should be an image");
-                }
-
-                file.SaveAs(this.Server.MapPath(Path.Combine("~/Content/imgs/", file.FileName)));
-            }
-
-            var avatar = this.images.GetProfileImage(file);
-
             if (this.ModelState.IsValid)
             {
                 var user = new User
@@ -188,8 +173,34 @@
                     LastName = model.LastName,
                     BirthDate = model.BirthDate,
                     Gender = model.Gender,
-                    ProfileImage = avatar
                 };
+
+                if (file != null)
+                {
+                    var isImage = FileUtils.IsImage(file);
+
+                    if (!isImage)
+                    {
+                        this.ModelState.AddModelError("ProfileImage", "The file should be an image");
+                    }
+
+                    var avatar = this.images.GetProfileImage<ProfileImage>(file, ImageType.Profile);
+
+                    bool exists = Directory.Exists(this.Server.MapPath(avatar.UrlPath));
+
+                    if (!exists)
+                    {
+                        Directory.CreateDirectory(this.Server.MapPath(avatar.UrlPath));
+                    }
+
+                    file.SaveAs(this.Server.MapPath(Path.Combine(avatar.UrlPath, avatar.NewFileName)));
+
+                    user.ProfileImageId = ((ProfileImage)avatar).Id;
+                }
+                else
+                {
+                    user.ProfileImageId = ((ProfileImage)this.images.GetDefualtProfileImage(model.Gender)).Id;
+                }
 
                 var result = await this.UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

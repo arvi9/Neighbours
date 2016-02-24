@@ -1,0 +1,82 @@
+﻿@model Neighbours.Web.Areas.Private.Models.Communities.CommunityDetailsViewModel
+@using Microsoft.AspNet.Identity
+@{
+    var userId = this.User.Identity.GetUserId();
+
+    var user = Model.Users.FirstOrDefault(u => u.Id == userId);
+    var admin = Model.Admins.FirstOrDefault(u => u.Id == userId);
+    var isCreator = Model.CreatorId == userId;
+
+    string waiting = null;
+
+    if (Model.WaitingUsers != null) {
+        var list = Model.WaitingUsers.Split(new string[] { "|" }, StringSplitOptions.RemoveEmptyEntries);
+
+        waiting = list.FirstOrDefault(i => i == userId);
+    }
+
+}
+
+@if (waiting != null)
+{
+    <p class="alert alert-success col-md-12"><span class="glyphicon glyphicon-signal" aria-hidden="true"></span><b>You are waiting for approval</b></p>
+
+    using (Ajax.BeginForm("Cancel", "Communities", new { id = Model.Id },
+                                new AjaxOptions
+                                {
+                                    HttpMethod = "POST",
+                                    InsertionMode = InsertionMode.Replace,
+                                    UpdateTargetId = "target"
+                                }, new { id = Model.Id }))
+    {
+
+        <input type="submit" value="Cancel" class="btn btn-warning" />
+    }
+}
+
+@if (user == null && admin == null && waiting == null)
+{
+    using (Ajax.BeginForm("Join", "Communities", new { id = Model.Id },
+                                new AjaxOptions
+                                {
+                                    HttpMethod = "POST",
+                                    InsertionMode = InsertionMode.Replace,
+                                    UpdateTargetId = "target"
+                                }, new { id = Model.Id }))
+    {
+
+        <input type="submit" value="Join" class="btn btn-primary" />
+    }
+}
+else if ((user != null || admin != null) && !isCreator)
+{
+    using (Ajax.BeginForm("Leave", "Community",
+                                new AjaxOptions
+                                {
+                                    HttpMethod = "POST",
+                                    InsertionMode = InsertionMode.Replace,
+                                    UpdateTargetId = "target"
+                                }))
+    {
+
+        <input type="submit" value="Leave" class="btn btn-danger" />
+    }
+}
+@if (isCreator)
+{
+    <p class="alert alert-info col-md-4"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><b>Owner</b></p>
+}
+@if (admin != null)
+{
+    <p class="alert alert-success col-md-4"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><b>Admin</b></p>
+}
+
+@if (user != null)
+{
+    <p class="alert alert-danger col-md-4"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><b>User</b></p>
+}
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

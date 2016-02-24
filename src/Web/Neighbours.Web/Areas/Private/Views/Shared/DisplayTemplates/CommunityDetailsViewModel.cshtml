@@ -1,0 +1,19 @@
+﻿@model Neighbours.Web.Areas.Private.Models.Communities.CommunityDetailsViewModel
+@using Microsoft.AspNet.Identity
+<div>
+    <h3 class=""><b>Community Name: @Model.Name</b></h3>
+    <h4><b>City: @Model.City</b></h4>
+    @if (Model.District != null)
+    {
+        <h4>
+            <b>
+                Neighbourhood:
+                @Model.District
+            </b>
+        </h4>
+    }
+    <h4><b>Address: @Model.Address</b></h4>
+
+    <h5><em>Total Members: @Model.Users.Count()</em></h5>
+    <h5><em>Total Posts: @Model.Posts.Count()</em></h5>
+</div>

@@ -205,7 +205,6 @@
   <ItemGroup>
     <Compile Include="App_Start\ApplicationSignInManager.cs" />
     <Compile Include="App_Start\ApplicationUserManager.cs" />
-    <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DatabaseConfig.cs" />
     <Compile Include="App_Start\EmailService.cs" />
@@ -215,9 +214,18 @@
     <Compile Include="App_Start\SmsService.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\ViewEnginesConfig.cs" />
+    <Compile Include="Areas\Administrator\AdministratorAreaRegistration.cs" />
+    <Compile Include="Areas\Private\Controllers\BaseController.cs" />
+    <Compile Include="Areas\Private\Controllers\CommunitiesController.cs" />
+    <Compile Include="Areas\Private\Models\Communities\CommunityAddViewModel.cs" />
+    <Compile Include="Areas\Private\Models\Communities\CommunityDetailsViewModel.cs" />
+    <Compile Include="Areas\Private\Models\Communities\CommunityViewModel.cs" />
+    <Compile Include="Areas\Private\PrivateAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Models\Account\ExternalLoginConfirmationViewModel.cs" />
     <Compile Include="Models\Account\ExternalLoginListViewModel.cs" />
@@ -228,6 +236,10 @@
     <Compile Include="Models\Account\ResetPasswordViewModel.cs" />
     <Compile Include="Models\Account\SendCodeViewModel.cs" />
     <Compile Include="Models\Account\VerifyCodeViewModel.cs" />
+    <Compile Include="Models\Communities\CommunityAddViewModel.cs" />
+    <Compile Include="Models\Communities\CommunityDetailsViewModel.cs" />
+    <Compile Include="Models\Communities\CommunityViewModel.cs" />
+    <Compile Include="Models\Home\StatisticsViewModel.cs" />
     <Compile Include="Models\Manage\AddPhoneNumberViewModel.cs" />
     <Compile Include="Models\Manage\ChangePasswordViewModel.cs" />
     <Compile Include="Models\Manage\ConfigureTwoFactorViewModel.cs" />
@@ -244,8 +256,10 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\community\0\4462d0\d556f751d4a5568f3157ca7e839a2837.jpg" />
     <Content Include="Content\imgs\female.png" />
     <Content Include="Content\imgs\other.png" />
+    <Content Include="Content\imgs\default-cover.jpg" />
     <Content Include="Content\kendo\kendo.black.min.css" />
     <Content Include="Content\kendo\kendo.black.mobile.min.css" />
     <Content Include="Content\kendo\kendo.blueopal.min.css" />
@@ -322,6 +336,8 @@
     <Content Include="Content\kendo\kendo.uniform.min.css" />
     <Content Include="Content\kendo\kendo.uniform.mobile.min.css" />
     <Content Include="Content\imgs\male.png" />
+    <Content Include="Content\profile\0\4462d0\d556f751d4a5568f3157ca7e839a2837.jpg" />
+    <Content Include="Content\profile\0\4462d0\wallpaperstock.net-inspirational-poster_wallpapers_34434_2560x1600.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -402,11 +418,25 @@
     <Content Include="Content\kendo\kendo.silver.mobile.min.css.map" />
     <Content Include="Content\kendo\kendo.uniform.min.css.map" />
     <Content Include="Content\kendo\kendo.uniform.mobile.min.css.map" />
+    <Content Include="Areas\Private\Views\web.config" />
+    <Content Include="Areas\Private\Views\Communities\All.cshtml" />
+    <Content Include="Areas\Private\Views\Communities\Create.cshtml" />
+    <Content Include="Areas\Private\Views\Communities\Details.cshtml" />
+    <Content Include="Areas\Private\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Private\Views\Shared\DisplayTemplates\CommunityDetailsViewModel.cshtml" />
+    <Content Include="Areas\Private\Views\Shared\DisplayTemplates\CommunityViewModel.cshtml" />
+    <Content Include="Areas\Private\Views\Shared\DisplayTemplates\CommunityViewModelList.cshtml" />
+    <Content Include="Areas\Private\Views\Shared\DisplayTemplates\CommunityViewModelShort.cshtml" />
+    <Content Include="Areas\Private\Views\Shared\_MapPartialDetails.cshtml" />
+    <Content Include="Areas\Private\Views\Communities\_PartialButtonsBadges.cshtml" />
+    <Content Include="Areas\Administrator\Views\web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -416,9 +446,15 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\site\community-image.js" />
+    <Content Include="Scripts\site\infiniteScroll.js" />
+    <Content Include="Scripts\site\map-community-details.js" />
+    <Content Include="Scripts\site\map-community-create.js" />
     <Content Include="Scripts\site\profile-image.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -452,9 +488,19 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CommunityViewModelList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CommunityViewModel.cshtml" />
+    <Content Include="Views\Home\_CommunityRow.cshtml" />
+    <Content Include="Views\Shared\_MapPartialDetails.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CommunityViewModelShort.cshtml" />
+    <Content Include="Views\Statistics\_StatisticsPartial.cshtml" />
+    <Content Include="Views\Home\All.cshtml" />
+    <Content Include="Views\Shared\_NavigationPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Administrator\Controllers\" />
+    <Folder Include="Areas\Administrator\Models\" />
+    <Folder Include="Areas\Administrator\Views\Shared\" />
     <Folder Include="Content\kendo\Black\" />
     <Folder Include="Content\kendo\BlueOpal\" />
     <Folder Include="Content\kendo\Bootstrap\" />
@@ -486,6 +532,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Neighbours.Common\Neighbours.Common.csproj">
+      <Project>{18cf1b8c-d801-4131-a4d0-53d7ed4472f0}</Project>
+      <Name>Neighbours.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Data\Neighbours.Data.Common\Neighbours.Data.Common.csproj">
       <Project>{48f84a40-aedf-40d5-baf3-b5338bf7ecc1}</Project>
       <Name>Neighbours.Data.Common</Name>

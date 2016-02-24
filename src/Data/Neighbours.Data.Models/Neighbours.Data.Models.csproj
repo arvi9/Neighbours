@@ -86,17 +86,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Active.cs" />
     <Compile Include="City.cs" />
     <Compile Include="Comment.cs" />
-    <Compile Include="CommentImage.cs" />
-    <Compile Include="Community.cs" />
-    <Compile Include="CommunityImage.cs" />
-    <Compile Include="District.cs" />
-    <Compile Include="FileInfo.cs" />
-    <Compile Include="Gender.cs" />
-    <Compile Include="Post.cs" />
     <Compile Include="PostImage.cs" />
+    <Compile Include="Community.cs" />
+    <Compile Include="District.cs" />
+    <Compile Include="FileInfoModel.cs" />
+    <Compile Include="Gender.cs" />
+    <Compile Include="ImageType.cs" />
+    <Compile Include="Like.cs" />
+    <Compile Include="LikeType.cs" />
+    <Compile Include="Post.cs" />
+    <Compile Include="CommunityImage.cs" />
     <Compile Include="ProfileImage.cs" />
+    <Compile Include="Status.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -105,6 +109,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Common\Neighbours.Common\Neighbours.Common.csproj">
+      <Project>{18cf1b8c-d801-4131-a4d0-53d7ed4472f0}</Project>
+      <Name>Neighbours.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Neighbours.Data.Common\Neighbours.Data.Common.csproj">
       <Project>{48f84a40-aedf-40d5-baf3-b5338bf7ecc1}</Project>
       <Name>Neighbours.Data.Common</Name>

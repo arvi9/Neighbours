@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
     using System.Text;
@@ -12,10 +13,6 @@
         public int Id { get; set; }
 
         public string Content { get; set; }
-
-        public int? CommentImageId { get; set; }
-
-        public virtual CommentImage CommentImage { get; set; }
 
         public int UserId { get; set; }
 

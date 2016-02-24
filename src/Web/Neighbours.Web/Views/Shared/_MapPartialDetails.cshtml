@@ -1,0 +1,15 @@
+﻿@model Neighbours.Web.Models.Communities.CommunityDetailsViewModel
+
+<div class="">
+    <div id="map_canvas" style="height: 300px;"></div>
+</div>
+
+<div>
+    @Html.Hidden("Latitude")
+    @Html.Hidden("Longitude")
+    @Html.Hidden("Name")
+    @Html.Hidden("Address")
+    @Html.Hidden("CommunityImage.UrlPath")
+    @Html.Hidden("CommunityImage.NewFileName")
+</div>
+

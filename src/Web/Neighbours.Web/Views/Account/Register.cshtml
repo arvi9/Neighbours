@@ -8,7 +8,7 @@
 {
     @Html.AntiForgeryToken()
 
-    @Html.ValidationSummary(true, "", new { @class = "alert alert-danger my-alert" })
+    @Html.ValidationSummary(true, "", new { @class = "" })
     <fieldset>
         <legend>Register new user</legend>
         <div class="form-group">
@@ -76,15 +76,9 @@
             @Html.LabelFor(m => m.Gender, new { @class = "col-md-4 radio inline control-label" })
             <div class="form-inline col-md-6 col-md-offset-0">
                 <div class="controls-row">
-                    <label class="radio inline">
-                        @(Html.Kendo().RadioButton().Name("maleRadio").Checked(true).Value(Gender.Male).HtmlAttributes(new { @name = "myGender" }).Label("Male"))
-                    </label>
-                    <label class="radio inline">
-                        @(Html.Kendo().RadioButton().Name("femaleRadio").Checked(false).Value(Gender.Female).HtmlAttributes(new { @name = "myGender" }).Label("Female"))
-                    </label>
-                    <label class="radio inline">
-                        @(Html.Kendo().RadioButton().Name("otherRadio").Checked(false).Value(Gender.Other).HtmlAttributes(new { @name = "myGender" }).Label("Other"))
-                    </label>
+                        @(Html.Kendo().RadioButton().Name("maleRadio").Checked(true).Value(Gender.Male).HtmlAttributes(new { @name = "Gender" }).Label("Male"))
+                        @(Html.Kendo().RadioButton().Name("femaleRadio").Value(Gender.Female).HtmlAttributes(new { @name = "Gender" }).Label("Female"))
+                        @(Html.Kendo().RadioButton().Name("otherRadio").Value(Gender.Other).HtmlAttributes(new { @name = "Gender" }).Label("Other"))
                 </div>
             </div>
         </div>

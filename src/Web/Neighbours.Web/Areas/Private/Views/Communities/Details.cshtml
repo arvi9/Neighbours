@@ -1,0 +1,29 @@
+﻿@model Neighbours.Web.Areas.Private.Models.Communities.CommunityDetailsViewModel
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="container">
+    <div class="col-md-5  modal-content">
+        @Html.DisplayFor(i => i)
+        <div id="target">
+            @Html.Partial("_PartialButtonsBadges")
+        </div>
+    </div>
+    <div class="col-md-5 col-md-offset-1 modal-content">
+
+        @Html.Partial("_MapPartialDetails")
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <script src="http://maps.google.com/maps/api/js?language=bg-BG&libraries=places" type="text/javascript"></script>
+
+    @Scripts.Render("~/Scripts/underscore-min.js")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/site/community-image.js")
+    @Scripts.Render("~/Scripts/site/map-community-details.js")
+}
+

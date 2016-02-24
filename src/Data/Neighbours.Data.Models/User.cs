@@ -4,23 +4,26 @@
     using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Security.Claims;
-    using System.Text;
     using System.Threading.Tasks;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
+    using Neighbours.Common.GlobalConstants;
+    using Neighbours.Common.ValidationAttributes;
 
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class User : IdentityUser
     {
         private ICollection<Post> posts;
         private ICollection<Community> communities;
+        private ICollection<Like> likes;
 
         public User()
         {
             this.posts = new HashSet<Post>();
             this.communities = new HashSet<Community>();
+            this.likes = new HashSet<Like>();
         }
 
         [Required]
@@ -34,7 +37,10 @@
         public string LastName { get; set; }
 
         [DisplayName("Date of birth")]
+        [BirthDate(GlobalValidationConstants.MinBirthDate, GlobalValidationConstants.MinAgeToRegister, ErrorMessage = "You are either too old or too young.")]
         public DateTime? BirthDate { get; set; }
+
+        public int ProfileImageId { get; set; }
 
         [Display(Name = "Profile Image")]
         public virtual ProfileImage ProfileImage { get; set; }
@@ -64,6 +70,19 @@
             set
             {
                 this.communities = value;
+            }
+        }
+
+        public virtual ICollection<Like> Likes
+        {
+            get
+            {
+                return this.likes;
+            }
+
+            set
+            {
+                this.likes = value;
             }
         }
 

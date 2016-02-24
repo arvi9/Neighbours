@@ -64,11 +64,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
-    <Compile Include="Contracts\IImagesService.cs" />
+    <Compile Include="Contracts\ICacheService.cs" />
+    <Compile Include="Contracts\IIdentifierProvider.cs" />
     <Compile Include="Contracts\IMappingService.cs" />
     <Compile Include="Contracts\IService.cs" />
     <Compile Include="Extensions\EncryptionExtensions.cs" />
     <Compile Include="Extensions\IntegerExtensions.cs" />
+    <Compile Include="HttpCacheService.cs" />
+    <Compile Include="IdentifierProvider.cs" />
     <Compile Include="MappingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

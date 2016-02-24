@@ -8,10 +8,14 @@
     using Neighbours.Data.Models;
     using Neighbours.Services.Common.Contracts;
 
-    public interface IUserServices : IService
+    public interface IDistrictsService : IService
     {
-        IQueryable<User> GetAll();
+        IQueryable<District> GetAll();
 
-        User GetById(string id);
+        District GetById(int id);
+
+        District Add(District model);
+
+        District Add(string name);
     }
 }

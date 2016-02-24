@@ -2,13 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
 
-    [Table("CommentImages")]
-    public class CommentImage : FileInfo
+    public enum Status
     {
+        Pending = 0,
+        Accepted = 1,
+        Rejected = 2
     }
 }
