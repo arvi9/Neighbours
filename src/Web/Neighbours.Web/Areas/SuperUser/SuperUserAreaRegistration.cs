@@ -1,22 +1,22 @@
-﻿namespace Neighbours.Web.Areas.Administrator
+﻿namespace Neighbours.Web.Areas.SuperUser
 {
     using System.Web.Mvc;
 
-    public class AdministratorAreaRegistration : AreaRegistration
+    public class SuperUserAreaRegistration : AreaRegistration
     {
         public override string AreaName
         {
             get
             {
-                return "Administrator";
+                return "SuperUser";
             }
         }
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
-                "Administrator_default",
-                "Administrator/{controller}/{action}/{id}",
+                "SuperUser_default",
+                "SuperUser/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional });
         }
     }

@@ -1,17 +1,17 @@
 ﻿namespace Neighbours.Web.Areas.Administrator.Controllers
 {
-    using Kendo.Mvc.UI;
-    using Microsoft.AspNet.Identity;
-    using Infrastructure.Mapping;
-    using Services.Data.Contracts;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
-    using Models.Communities;
-    using Kendo.Mvc.Extensions;
     using Data.Models;
+    using Infrastructure.Mapping;
+    using Kendo.Mvc.Extensions;
+    using Kendo.Mvc.UI;
+    using Microsoft.AspNet.Identity;
+    using Models.Communities;
+    using Services.Data.Contracts;
 
     public class CommunitiesController : Controller
     {

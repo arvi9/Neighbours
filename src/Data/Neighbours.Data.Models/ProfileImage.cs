@@ -8,7 +8,6 @@
     using System.Text;
     using System.Threading.Tasks;
 
-
     public class ProfileImage : FileInfoModel
     {
     }

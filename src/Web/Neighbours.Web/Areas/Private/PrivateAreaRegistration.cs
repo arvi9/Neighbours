@@ -17,8 +17,7 @@
             context.MapRoute(
                 "Private_default",
                 "Private/{controller}/{action}/{id}",
-                new { controller = "Communities", action = "Index", id = UrlParameter.Optional }
-            );
+                new { controller = "Communities", action = "Index", id = UrlParameter.Optional });
         }
     }
 }

@@ -71,7 +71,6 @@ namespace Neighbours.Web.App_Start
 
             kernel.Bind(typeof(IDeletableEntityRepository<>)).To(typeof(DeletableEntityRepository<>));
 
-
             kernel.Bind<DbContext>().To<NeighboursDbContext>().InRequestScope();
 
             kernel.Bind<ICacheService>().To(typeof(HttpCacheService));

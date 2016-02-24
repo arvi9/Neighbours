@@ -12,6 +12,10 @@
     {
         IQueryable<User> GetAll();
 
+        void Delete(string userId);
+
+        void Update(string userId, string username, string firstName, string lastName);
+
         User GetById(string id);
 
         void AddToRole(string userId, string role);
@@ -23,6 +27,5 @@
         void AddToCommunity(string userId, int id);
 
         void Deny(string userId, int id);
-
     }
 }

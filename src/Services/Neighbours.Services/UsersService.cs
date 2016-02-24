@@ -24,7 +24,6 @@
         {
             this.users = users;
             this.communities = communities;
-
         }
 
         public IQueryable<User> GetAll()
@@ -88,7 +87,6 @@
             user.WaitingListCommunities = list.ToArray();
 
             this.users.SaveChanges();
-
         }
 
         public void AddToCommunity(string userId, int id)
@@ -127,6 +125,24 @@
             list.Remove(id);
 
             user.WaitingListCommunities = list.ToArray();
+        }
+
+        public void Delete(string userId)
+        {
+            this.users.Delete(userId);
+            this.users.SaveChanges();
+        }
+
+        public void Update(string userId, string username, string firstName, string lastName)
+        {
+            var userFound = this.users.GetById(userId);
+
+            userFound.FirstName = firstName;
+            userFound.LastName = lastName;
+            userFound.UserName = username;
+
+            this.users.Update(userFound);
+            this.users.SaveChanges();
         }
     }
 }

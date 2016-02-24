@@ -2,8 +2,8 @@
 {
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using Neighbours.Data.Models;
     using Microsoft.AspNet.Identity.EntityFramework;
+    using Neighbours.Data.Models;
 
     public interface INeighboursDbContext
     {

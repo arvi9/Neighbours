@@ -7,8 +7,9 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
+    using Common.Models;
 
-    public class Comment
+    public class Comment : DeletableEntity
     {
         public int Id { get; set; }
 

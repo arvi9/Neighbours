@@ -1,15 +1,14 @@
-﻿namespace Neighbours.Web.Areas.Administrator.Controllers
+﻿namespace Neighbours.Web.Areas.SuperUser.Controllers
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web;
     using System.Web.Mvc;
+    using Data.Models;
     using Infrastructure.Mapping;
     using Kendo.Mvc.Extensions;
     using Kendo.Mvc.UI;
-    using Microsoft.AspNet.Identity;
-    using Models.Communities;
     using Models.Users;
     using Services.Data.Contracts;
 
@@ -24,7 +23,6 @@
             this.communities = communities;
         }
 
-        // GET: Administrator/Communities
         public ActionResult Index()
         {
             return this.View();
@@ -32,9 +30,7 @@
 
         public ActionResult UsersRead([DataSourceRequest]DataSourceRequest request)
         {
-            var id = this.Request.UrlReferrer.Segments[this.Request.UrlReferrer.Segments.Count() - 1];
-
-            var model = this.users.GetAllPending(int.Parse(id)).To<UserViewModelAdmin>();
+            var model = this.users.GetAll().Where(u => u.UserName != "super@site.com").To<UserViewModelSuper>();
 
             DataSourceResult result = model.ToDataSourceResult(request);
 
@@ -42,26 +38,22 @@
         }
 
         [HttpPost]
-        public ActionResult UsersAccept([DataSourceRequest]DataSourceRequest request, UserViewModelAdmin model)
+        public ActionResult UsersEdit([DataSourceRequest]DataSourceRequest request, UserViewModelSuper model)
         {
-            var id = this.Request.UrlReferrer.Segments[this.Request.UrlReferrer.Segments.Count() - 1];
-            var userId = model.Id;
-            this.users.AddToCommunity(userId, int.Parse(id));
+            this.users.Update(model.Id, model.UserName, model.FirstName, model.LastName);
 
-            var modelResult = this.users.GetAllPending(int.Parse(id)).To<UserViewModelAdmin>();
+            var modelResult = this.users.GetAll().Where(u => u.UserName != "super@site.com").To<UserViewModelSuper>();
 
             DataSourceResult result = modelResult.ToDataSourceResult(request);
 
             return this.Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult UsersDeny([DataSourceRequest]DataSourceRequest request, UserViewModelAdmin model)
+        public ActionResult UsersDelete([DataSourceRequest]DataSourceRequest request, UserViewModelSuper model)
         {
-            var id = this.Request.UrlReferrer.Segments[this.Request.UrlReferrer.Segments.Count() - 1];
-            var userId = model.Id;
-            this.communities.Cancel(userId, int.Parse(id));
+            this.users.Delete(model.Id);
 
-            var modelResult = this.users.GetAllPending(int.Parse(id)).To<UserViewModelAdmin>();
+            var modelResult = this.users.GetAll().Where(u => u.UserName != "super@site.com").To<UserViewModelSuper>();
 
             DataSourceResult result = modelResult.ToDataSourceResult(request);
 

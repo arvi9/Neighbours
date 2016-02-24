@@ -226,6 +226,11 @@
     <Compile Include="Areas\Private\Models\Communities\CommunityDetailsViewModel.cs" />
     <Compile Include="Areas\Private\Models\Communities\CommunityViewModel.cs" />
     <Compile Include="Areas\Private\PrivateAreaRegistration.cs" />
+    <Compile Include="Areas\SuperUser\Controllers\BaseController.cs" />
+    <Compile Include="Areas\SuperUser\Controllers\CommunitiesSuperUserController.cs" />
+    <Compile Include="Areas\SuperUser\Controllers\UsersController.cs" />
+    <Compile Include="Areas\SuperUser\Models\Users\UserViewModelSuper.cs" />
+    <Compile Include="Areas\SuperUser\SuperUserAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -443,6 +448,10 @@
     <Content Include="Areas\Administrator\Views\Communities\EditorTemplates\UserViewModelAdmin.cshtml" />
     <Content Include="Areas\Private\Views\Communities\_CommunityRow.cshtml" />
     <Content Include="Areas\Private\Views\Communities\_Loading.cshtml" />
+    <Content Include="Areas\SuperUser\Views\web.config" />
+    <Content Include="Areas\SuperUser\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\SuperUser\Views\Users\Index.cshtml" />
+    <Content Include="Areas\SuperUser\Views\Users\EditorTemplates\UserViewModelSuper.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -515,6 +524,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Administrator\Views\Shared\" />
+    <Folder Include="Areas\SuperUser\Models\CommunitiesSuperUser\" />
+    <Folder Include="Areas\SuperUser\Views\CommunitiesSuperUser\" />
+    <Folder Include="Areas\SuperUser\Views\Shared\" />
     <Folder Include="Content\kendo\Black\" />
     <Folder Include="Content\kendo\BlueOpal\" />
     <Folder Include="Content\kendo\Bootstrap\" />

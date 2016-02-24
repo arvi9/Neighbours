@@ -1,10 +1,6 @@
 ﻿namespace Neighbours.Services.Data.Contracts
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Common.Contracts;
     using Neighbours.Data.Models;
 
@@ -29,7 +25,5 @@
         void UpdateName(int id, string name);
 
         void Delete(int id);
-
-
     }
 }

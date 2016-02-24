@@ -1,0 +1,55 @@
+﻿@using Kendo.Mvc.UI
+@{
+    ViewBag.Title = "Communities admin page";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+@(Html.Kendo().Grid<Neighbours.Web.Areas.SuperUser.Models.Users.UserViewModelSuper>()
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.UserName);
+          columns.Bound(c => c.ProfileImage).ClientTemplate("<img src=" + "#=ProfileImage#" + " alt='#=UserName #' Title='#=UserName #' width='75'/>");
+          columns.Bound(c => c.FirstName);
+          columns.Bound(c => c.LastName);
+          columns.Command(command =>
+          {
+              command.Edit();
+              command.Destroy();
+          });
+      })
+
+      .ColumnMenu()
+      .Editable(editable => editable.Mode(GridEditMode.PopUp).TemplateName("UserViewModelSuper"))
+      .Pageable()
+      .Navigatable()
+      .Sortable(sortable =>
+      {
+          sortable.SortMode(GridSortMode.MultipleColumn);
+      })
+      .Filterable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .Model(model =>
+          {
+              model.Id(p => p.Id);
+              model.Field(m => m.Id).Editable(false);
+              model.Field(m => m.UserName).Editable(true);
+
+              model.Field(m => m.FirstName).Editable(true);
+              model.Field(m => m.LastName).Editable(true);
+          })
+          .Read(read => read.Action("UsersRead", "Users"))
+          .Update(update => update.Action("UsersEdit", "Users"))
+          .Destroy(delete => delete.Action("UsersDelete", "Users"))
+          .PageSize(5)
+      )
+)
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+
+    </script>
+}
